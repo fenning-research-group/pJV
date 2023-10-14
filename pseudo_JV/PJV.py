@@ -8,7 +8,7 @@ from PLQY.ldc502 import LDC502
 from frghardware.keithleyjv import control3
 plus_minus = u"\u00B1"
 
-#my change 1
+#my change 2
 
 class pJV:
 
