@@ -8,10 +8,10 @@ from PLQY.ldc502 import LDC502
 from frghardware.keithleyjv import control3
 plus_minus = u"\u00B1"
 
-#my change 6
+#Version 8
 
 class pJV:
-
+    ''' A class to take pseudo JV curves '''
     def __init__(self):
         self.ldc = LDC502("COM24")
         self.JVcode = control3.Control(address='GPIB1::22::INSTR')
@@ -22,6 +22,23 @@ class pJV:
 
     # Function to take intensity dependent voltage measurments of a cell: 
     def take_pJV(self, sample_name = "sample", min_current = 300, max_current = 800, step = 20, n_wires = 2, num_measurements = 5):
+        ''' Method to take a pseudo-JV curve that will save the data in a csv file
+        Parameters
+        ---------
+        sample_name : str
+            The name of your sample
+        min_current : int
+            Minimum current setting of laser
+        max_curent : int
+            Maximum current setting of laser
+        step : int
+            Steps between min and max current
+        n_wires : int
+            The number of probes you are using with the Keithly to measure Voc
+        num_measurements : int
+            The number of times each condition is measured and averaged
+        '''
+            sample name
         self.ldc.set_laserOn()
         self.ldc.set_tecOn()
         self.ldc.set_modulationOff()
