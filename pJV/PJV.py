@@ -94,7 +94,7 @@ class pJV:
                 writer.writerow([current_setting, avg_voc, std_voc])
 
     # User facing method to take full pseudo JV data
-    def take_pJV(self, sample_name = "sample", min_current = 300, max_current = 800, step = 20, n_wires = 2, num_measurements = 5, stabilize_time = 3, direction = "fwd"):
+    def take_pJV(self, sample_name = "sample", min_current = 300, max_current = 780, step = 20, n_wires = 2, num_measurements = 5, stabilize_time = 3, direction = "fwd"):
         ''' Method to take a pseudo-JV curve that will save the data in a csv file
         Parameters
         ----------
@@ -103,7 +103,7 @@ class pJV:
         min_current : int
             Minimum current setting of laser, default is 300 mA
         max_current : int
-            Maximum current setting of laser, default is 800 mA
+            Maximum current setting of laser, default is 780 mA
         step : int
             Steps between min and max current, default is 20 mA
         n_wires : int
