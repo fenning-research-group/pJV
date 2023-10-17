@@ -41,6 +41,8 @@ class pJV:
             print("Error while trying to connect to the Laser: ", e)
             print("Please ensure the Laser is connected to COM24 and try again.")
             raise self.CustomError("Laser Connection Error")
+
+
         
         # Connect to the Keithley
         try:
