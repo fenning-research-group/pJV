@@ -72,7 +72,11 @@ class pJV:
         # Initialize the data dictionary
         data = {}
         # Stabilize the laser and take measurements
+
         for current_setting in np.arange(start_current, end_current + step, step):
+
+        for current_setting in np.arange(start_current, end_current+step, step):
+
             voc_list = []
             if np.abs(self.ldc.get_laser_current() - current_setting) > 2:
                 self.ldc.set_laserCurrent(current_setting)
