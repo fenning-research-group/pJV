@@ -16,7 +16,7 @@ except ImportError:
     
 plus_minus = u"\u00B1"
 
-# Version 10- fwdrev capability
+# Version 11- more configuration
 
 class pJV:
     ''' A class to take pseudo JV curves '''
@@ -32,18 +32,28 @@ class pJV:
             self.laser_current = self.ldc.get_laser_current()
             self.laser_temp = self.ldc.get_laser_temp()
             self.laser_wl = 532
+            self.ldc.set_laserOn()
+            self.ldc.set_tecOn()
+            self.ldc.set_modulationOff()
+            self.ldc.set_laserCurrent(400)
+            print("Laser connected and set to safe level to set up device testing.")
         except Exception as e:  
             print("Error while trying to connect to the Laser: ", e)
             print("Please ensure the Laser is connected to COM24 and try again.")
             raise self.CustomError("Laser Connection Error")
+
+
         
         # Connect to the Keithley
         try:
             self.JVcode = control3.Control(address='GPIB1::22::INSTR')
+            self.JVcode.wires = 2
+            print("Keithley connected and set to 2 probe sensing.")
         except Exception as e:
             print("Error while trying to connect to the Keithley: ", e)
             print("Please ensure the Keithley is connected to 'GPIB1::22::INSTR' and try again.")
             raise self.CustomError("Keithley Connection Error")
+            
 
     # Method to configure the hardware
     def _configure(self, n_wires = 2):
@@ -61,7 +71,9 @@ class pJV:
         # Initialize the data dictionary
         data = {}
         # Stabilize the laser and take measurements
+
         for current_setting in np.arange(start_current, end_current+step, step):
+
             voc_list = []
             if np.abs(self.ldc.get_laser_current() - current_setting) > 2:
                 self.ldc.set_laserCurrent(current_setting)
@@ -94,7 +106,9 @@ class pJV:
                 writer.writerow([current_setting, avg_voc, std_voc])
 
     # User facing method to take full pseudo JV data
+<<<<<<< HEAD
     def take_pjv(self, sample_name = "sample", min_current = 300, max_current = 780, step = 20, n_wires = 2, num_measurements = 5, stabilize_time = 3, direction = "fwd"):
+
         ''' Method to take a pseudo-JV curve that will save the data in a csv file
         Parameters
         ----------
@@ -107,13 +121,13 @@ class pJV:
         step : int
             Steps between min and max current, default is 20 mA
         n_wires : int
-            The number of probes used with Keithly to measure Voc; options are 2 or 4; default is 2
+            The number of probes used with Keithly to measure Voc; options are 2 or 4, default is 2
         num_measurements : int
             The number of times each condition is measured and averaged, default is 5
         stabilize_time : float
-            The time between laser current settings to allow laser power to stabilize, default is 3 seconds
+            The time between laser current settings to allow laser power to stabilize, default is 4 seconds
         direction : str
-            The direction of the scan: "fwd", "rev", or "fwdrev", default is "fwd"
+            The direction of the scan: "fwd", "rev", or "fwdrev", default is "rev"
 
         Returns
         -------
