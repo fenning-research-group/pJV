@@ -106,7 +106,6 @@ class pJV:
                 writer.writerow([current_setting, avg_voc, std_voc])
 
     # User facing method to take full pseudo JV data
-<<<<<<< HEAD
     def take_pjv(self, sample_name = "sample", min_current = 300, max_current = 780, step = 20, n_wires = 2, num_measurements = 5, stabilize_time = 3, direction = "fwd"):
 
         ''' Method to take a pseudo-JV curve that will save the data in a csv file
