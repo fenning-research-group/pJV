@@ -46,7 +46,7 @@ class pJV:
         
         # Connect to the Keithley
         try:
-            self.JVcode = control3.Control(address='GPIB1::22::INSTR')
+            self.JVcode = control3.Control(address='GPIB2::22::INSTR')
             self.JVcode.wires = 2
             print("Keithley connected and set to 2 probe sensing.")
         except Exception as e:
