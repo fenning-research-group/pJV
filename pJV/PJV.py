@@ -150,3 +150,6 @@ class pJV:
         else:
             print("Invalid direction. Please enter 'fwd', 'rev', or 'fwdrev'")
 
+        self.ldc.set_laserOff()
+        self.ldc.set_tecOff()    
+
